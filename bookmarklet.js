@@ -1,7 +1,22 @@
 /* Changes background and foreground colours  for all elements on the page */
-function r() { return Math.floor(Math.random() * 255); }
-function fakk(){ this.style.color = ['rgb(',[r(),r(),r()].join(','),')'].join(''),
-this.style.backgroundColor = ['rgb(',[r(),r(),r()].join(','),')'].join(''); }
-[].forEach.call(document.all, function(item) {
-    setTimeout(function() {fakk.call(item)}, (Math.random()*500)+100)
-});
+function r() {
+    return Math.floor(Math.random() * 255);
+}
+
+function lemon() {
+    with(this.style) {
+        color = ['rgb(', [r(), r(), r()].join(','), ')'].join('');
+        backgroundColor = ['rgb(', [r(), r(), r()].join(','), ')'].join('');
+    }
+}
+
+function rocks() {
+    Array.prototype.forEach.call(document.all, function(item) {
+        setTimeout(function() {
+            lemon.call(item);
+        }, Math.random() * 100 + 100);
+    });
+    setTimeout(rocks, Math.random() * 500 + 100);
+}
+
+rocks();
